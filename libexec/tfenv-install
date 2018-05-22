@@ -69,7 +69,7 @@ case "$(uname -s)" in
 esac
 
 keybase_bin="$(which keybase 2>/dev/null)"
-shasum_bin="$(which shasum 2>/dev/null)"
+shasum_bin="$(which sha256sum 2>/dev/null)"
 
 version_url="https://releases.hashicorp.com/terraform/${version}"
 tarball_name="terraform_${version}_${os}.zip"
@@ -109,7 +109,7 @@ fi
 if [[ -n "${shasum_bin}" && -x "${shasum_bin}" ]]; then
   (
     cd "${download_tmp}"
-    "${shasum_bin}" -a 256 -s -c <(grep -F "${tarball_name}" "${shasums_name}") || error_and_die "SHA256 hash does not match!"
+    "${shasum_bin}" --status -c <(grep -F "${tarball_name}" "${shasums_name}") || error_and_die "SHA256 hash does not match!"
   )
 else
   # Lack of shasum deserves a proper warning
