@@ -17,6 +17,6 @@ set -e
 [ -n "${TFENV_DEBUG}" ] && set -x
 
 export TFENV_VERSION="$(tfenv-version-name)"
-TF_BIN_PATH="${TFENV_ROOT}/versions/${TFENV_VERSION}/terraform"
+TF_BIN_PATH="${TFENV_ROOT}/versions/${TFENV_VERSION}"
 export PATH="${TF_BIN_PATH}:${PATH}"
-"${TF_BIN_PATH}" "${@}"
+"${TF_BIN_PATH}/terraform" "${@}"
